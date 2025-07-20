@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<robot name="learm">
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.8 1.0" />
+  </material>
+  <material name="DarkGrey">
+    <color rgba="0.3 0.3 0.3 1.0" />
+  </material>
+  <material name="Black">
+    <color rgba="0 0 0 1.0" />
+  </material>
+  <link name="learm_base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/base.stl"/>
+      </geometry>
+      <material name="Black" />
+    </visual>
+  </link>
+  <link name="learm_1_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/shoulder.stl"/>
+      </geometry>
+      <material name="Blue" />
+    </visual>
+  </link>
+  <link name="learm_2_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/humerus.stl"/>
+      </geometry>
+      <material name="Blue" />
+      <origin rpy="0 0 3.1415926" xyz="0 0 0"/>
+    </visual>
+  </link>
+  <link name="learm_3_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/forearm.stl"/>
+      </geometry>
+      <material name="Blue" />
+    </visual>
+  </link>
+  <link name="learm_4_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/wrist.stl"/>
+      </geometry>
+      <material name="Blue" />
+    </visual>
+  </link>
+  <link name="learm_5_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/hand.stl"/>
+      </geometry>
+      <material name="DarkGrey" />
+    </visual>
+  </link>
+  <link name="learm_6_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/carpal-left.stl"/>
+      </geometry>
+      <material name="Black" />
+    </visual>
+  </link>
+  <link name="grip_right_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/carpal-right.stl"/>
+      </geometry>
+      <material name="Black" />
+    </visual>
+  </link>
+  <link name="tendon_left_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/tendon.stl"/>
+      </geometry>
+      <material name="Black" />
+    </visual>
+  </link>
+  <link name="tendon_right_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/tendon.stl"/>
+      </geometry>
+      <material name="Black" />
+    </visual>
+  </link>
+  <link name="finger_left_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/finger.stl"/>
+      </geometry>
+      <material name="Black" />
+    </visual>
+  </link>
+  <link name="finger_right_link">
+    <visual>
+      <origin rpy="0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://arm_model/learm_meshes/finger.stl"/>
+      </geometry>
+      <material name="Black" />
+    </visual>
+  </link>
+
+  <joint name="learm_1_joint" type="revolute">
+    <parent link="learm_base_link"/>
+    <child link="learm_1_link"/>
+    <origin xyz="0 0 0.0563"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="1000" velocity="1.0"/>
+  </joint>
+  <joint name="learm_2_joint" type="revolute">
+    <parent link="learm_1_link"/>
+    <child link="learm_2_link"/>
+    <origin xyz="0.010 0 0.028"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="1000" velocity="1.0"/>
+  </joint>
+  <joint name="learm_3_joint" type="revolute">
+    <parent link="learm_2_link"/>
+    <child link="learm_3_link"/>
+    <origin xyz="0 0 0.105"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="1000" velocity="1.0"/>
+  </joint>
+  <joint name="learm_4_joint" type="revolute">
+    <parent link="learm_3_link"/>
+    <child link="learm_4_link"/>
+    <origin xyz="0 0 0.090"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="1000" velocity="1.0"/>
+  </joint>
+  <joint name="learm_5_joint" type="revolute">
+    <parent link="learm_4_link"/>
+    <child link="learm_5_link"/>
+    <origin xyz="0 0 0.0675"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="1000" velocity="1.0"/>
+  </joint>
+  <joint name="learm_6_joint" type="revolute">
+    <parent link="learm_5_link"/>
+    <child link="learm_6_link"/>
+    <origin xyz="0 +0.015 0.030" rpy="-1.57 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-1.57" upper="0" effort="1000" velocity="1.0"/>
+  </joint>
+  <joint name="grip_right" type="revolute">
+    <parent link="learm_5_link"/>
+    <child link="grip_right_link"/>
+    <origin xyz="0 -0.015 0.030" rpy="1.57 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="0" upper="1.57" effort="1000" velocity="1.0"/>
+    <mimic joint="learm_6_joint" multiplier="-1"/>
+  </joint>
+  <joint name="tendon_left" type="revolute">
+    <parent link="learm_5_link"/>
+    <child link="tendon_left_link"/>
+    <origin xyz="0 +0.005 0.050" rpy="-1.57 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-1.57" upper="0" effort="1000" velocity="1.0"/>
+    <mimic joint="learm_6_joint"/>
+  </joint>
+  <joint name="tendon_right" type="revolute">
+    <parent link="learm_5_link"/>
+    <child link="tendon_right_link"/>
+    <origin xyz="0 -0.005 0.050" rpy="1.57 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="0" upper="1.57" effort="1000" velocity="1.0"/>
+    <mimic joint="learm_6_joint" multiplier="-1"/>
+  </joint>
+  <joint name="finger_left" type="revolute">
+    <parent link="learm_6_link"/>
+    <child link="finger_left_link"/>
+    <origin xyz="0 0 0.030" rpy="1.57 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="-1.57" upper="0" effort="1000" velocity="1.0"/>
+    <mimic joint="learm_6_joint" multiplier="-1"/>
+  </joint>
+  <joint name="finger_right" type="revolute">
+    <parent link="grip_right_link"/>
+    <child link="finger_right_link"/>
+    <origin xyz="0 0 0.030" rpy="-1.57 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="0" upper="1.57" effort="1000" velocity="1.0"/>
+    <mimic joint="learm_6_joint"/>
+  </joint>
+</robot>
