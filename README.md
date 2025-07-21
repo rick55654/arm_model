@@ -45,4 +45,4 @@ Below is an example screenshot of the robot model visualized in RViz2:
 This package is based on and modified from the following repositories to match the real robotic arms in our laboratory:
 
 - [andrewda/learm_ros2](https://github.com/andrewda/learm_ros2)
-- [andrewda/xarm_ros2](https://github.com/andrewda/xarm_ros2)
+- [daira-ai/xArm_Lewansoul_ROS](https://github.com/daira-ai/xArm_Lewansoul_ROS)
