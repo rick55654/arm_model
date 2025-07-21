@@ -37,3 +37,12 @@ ros2 launch arm_model xarm.launch.py
 Below is an example screenshot of the robot model visualized in RViz2:
 
 ![RViz2 Example](docs/example_result.png)
+
+---
+
+## Credits
+
+This package is based on and modified from the following repositories to match the real robotic arms in our laboratory:
+
+- [andrewda/learm_ros2](https://github.com/andrewda/learm_ros2)
+- [andrewda/xarm_ros2](https://github.com/andrewda/xarm_ros2)
